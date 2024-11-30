@@ -6,4 +6,10 @@ defmodule PotionTalkWeb.PageController do
     # so skip the default app layout.
     render(conn, :home, layout: false)
   end
+
+  def login(conn, %{"uname" => uname}) do
+    conn
+    |> Plug.Conn.assign(:uname, uname)
+    |> redirect(to: ~p"/chat?uname=#{uname}")
+  end
 end

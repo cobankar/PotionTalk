@@ -1,5 +1,12 @@
 defmodule PotionTalkWeb.ChatLive.Index do
   use PotionTalkWeb, :live_view
+  def mount(%{"uname" => uname}, _session, socket) do
+    if connected?(socket) do
+      PotionTalkWeb.Endpoint.subscribe(topic())
+    end
+    {:ok, assign(socket, username: uname, messages: [])}
+  end
+
   def mount(_params, _session, socket) do
     if connected?(socket) do
       PotionTalkWeb.Endpoint.subscribe(topic())
@@ -17,7 +24,7 @@ defmodule PotionTalkWeb.ChatLive.Index do
   end
 
   defp username do
-    "cob"
+    "DEFAULT"
   end
 
   defp topic do

@@ -18,6 +18,7 @@ defmodule PotionTalkWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    post "/", PageController, :login
 
     live "/chat", ChatLive.Index
   end
