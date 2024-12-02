@@ -1,33 +1,30 @@
 defmodule PotionTalkWeb.ChatLive.Index do
   use PotionTalkWeb, :live_view
+
   def mount(%{"uname" => uname}, _session, socket) do
     if connected?(socket) do
-      PotionTalkWeb.Endpoint.subscribe(topic())
+      PotionTalkWeb.Endpoint.subscribe("change_chat")
     end
-    {:ok, assign(socket, username: uname, messages: [])}
+    {:ok, assign(socket, username: uname, chat_id: chat_id())}
   end
 
   def mount(_params, _session, socket) do
     if connected?(socket) do
-      PotionTalkWeb.Endpoint.subscribe(topic())
+      PotionTalkWeb.Endpoint.subscribe("change_chat")
     end
-    {:ok, assign(socket, username: username(), messages: [])}
+    {:ok, assign(socket, username: username(), chat_id: chat_id())}
   end
 
-  def handle_event("send", %{"text" => text}, socket) do
-    PotionTalkWeb.Endpoint.broadcast(topic(), "message", %{text: text, name: socket.assigns.username})
-    {:noreply, socket}
-  end
-
-  def handle_info(%{event: "message", payload: message}, socket) do
-    {:noreply, assign(socket, messages: socket.assigns.messages ++ [message])}
+  def handle_info(%{event: "new_chat", payload: chat}, socket) do
+    IO.puts(chat.chat_id)
+    {:noreply, assign(socket, chat_id: chat.chat_id)}
   end
 
   defp username do
     "DEFAULT"
   end
 
-  defp topic do
-    "chat"
+  defp chat_id do
+    "default_chat"
   end
 end

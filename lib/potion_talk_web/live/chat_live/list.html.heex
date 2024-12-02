@@ -1,0 +1,16 @@
+<div>
+  <h1>Chats</h1>
+  <div class="chats">
+    <%= if @chats && length(@chats) > 0 do %>
+      <%= for c <- @chats do %>
+        <p phx-click="change_chat" phx-value-content={c.id}><b><%= c.id %></b></p>
+      <% end %>
+    <% else %>
+      <p>No chats available. Please check back later!</p>
+    <% end %>
+  </div>
+  <%!-- <form phx-submit="send">
+    <input type="text" name="text" />
+    <button type="submit">Send</button>
+  </form> --%>
+</div>

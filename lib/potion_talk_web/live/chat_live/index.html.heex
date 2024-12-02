@@ -1,12 +1,19 @@
 <div>
-  <h1>ChatLive</h1>
-  <div class="messages" style="border: 1px solid #eee; height: 400px; overflow: scroll; margin-bottom: 8px;">
-    <%= for m <- @messages do %>
-      <p style="margin: 2px;"><b><%= m.name %></b>: <%= m.text %></p>
-    <% end %>
+  <div class="grid grid-cols-2 bg-blue-300">
+    <div class="">
+      <%= live_render(
+        @socket,
+        PotionTalkWeb.ChatLive.List,
+        id: "chat_list"
+      ) %>
+    </div>
+    <div class="">
+      <%= live_render(
+        @socket,
+        PotionTalkWeb.ChatLive.Chat,
+        id: @chat_id,
+        session: %{"username" => @username, "chat_id" => @chat_id}
+      ) %>
+    </div>
   </div>
-  <form phx-submit="send">
-    <input type="text" name="text" />
-    <button type="submit">Send</button>
-  </form>
 </div>
