@@ -1,4 +1,5 @@
 <div>
+  <.flash_group flash={@flash} />
   <h1>Chats</h1>
   <div class="chats">
     <%= if @chats && length(@chats) > 0 do %>
@@ -8,9 +9,6 @@
     <% else %>
       <p>No chats available. Please check back later!</p>
     <% end %>
+    <.live_component module={PotionTalkWeb.ChatLive.CreateChat} id="create_chat"/>
   </div>
-  <%!-- <form phx-submit="send">
-    <input type="text" name="text" />
-    <button type="submit">Send</button>
-  </form> --%>
 </div>

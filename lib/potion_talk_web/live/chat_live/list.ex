@@ -2,9 +2,6 @@ defmodule PotionTalkWeb.ChatLive.List do
   use PotionTalkWeb, :live_view
 
   def mount(_params, _session, socket) do
-    # if connected?(socket) do
-    #   PotionTalkWeb.Endpoint.subscribe(:chat_list)
-    # end
     {:ok, assign(socket, chats: get_chats())}
   end
 
@@ -13,14 +10,15 @@ defmodule PotionTalkWeb.ChatLive.List do
     {:noreply, socket}
   end
 
-  # def handle_event("send", %{"text" => text}, socket) do
-  #   PotionTalkWeb.Endpoint.broadcast(socket.assigns.chat_id, "message", %{text: text, name: socket.assigns.username})
-  #   {:noreply, socket}
-  # end
-
-  # def handle_info(%{event: "message", payload: message}, socket) do
-  #   {:noreply, assign(socket, messages: socket.assigns.messages ++ [message])}
-  # end
+  def handle_info({:create_chat, chat_name}, socket) do
+    new_chat = %{id: chat_name}
+    exists = Enum.member?(socket.assigns.chats, new_chat)
+    if exists do
+      {:noreply, put_flash(socket, :error, "Could not create: Chat already exists")}
+    else
+      {:noreply, assign(socket, chats: socket.assigns.chats ++ [new_chat])}
+    end
+  end
 
   def get_chats() do
     [
