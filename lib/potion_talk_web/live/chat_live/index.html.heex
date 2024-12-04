@@ -4,16 +4,17 @@
       <%= live_render(
         @socket,
         PotionTalkWeb.ChatLive.List,
-        id: "chat_list"
+        id: "chat_list",
+        session: %{"username" => @username}
       ) %>
     </div>
     <div class="">
-      <%= live_render(
-        @socket,
-        PotionTalkWeb.ChatLive.Chat,
-        id: @chat_id,
-        session: %{"username" => @username, "chat_id" => @chat_id}
-      ) %>
+        <%= live_render(
+          @socket,
+          PotionTalkWeb.ChatLive.Chat,
+          id: @chat_id,
+          session: %{"username" => @username, "chat_id" => @chat_id}
+        ) %>
     </div>
   </div>
 </div>

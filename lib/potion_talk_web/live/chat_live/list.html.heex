@@ -7,7 +7,7 @@
         <p phx-click="change_chat" phx-value-content={c.id}><b><%= c.id %></b></p>
       <% end %>
     <% else %>
-      <p>No chats available. Please check back later!</p>
+      <p>No chats available. Please create a new chat!</p>
     <% end %>
     <.live_component module={PotionTalkWeb.ChatLive.CreateChat} id="create_chat"/>
   </div>

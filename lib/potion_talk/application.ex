@@ -10,6 +10,8 @@ defmodule PotionTalk.Application do
     children = [
       PotionTalkWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:potion_talk, :dns_cluster_query) || :ignore},
+      # Start the ETS table as a worker
+      PotionTalk.Storage.ChatStorage,
       {Phoenix.PubSub, name: PotionTalk.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: PotionTalk.Finch},

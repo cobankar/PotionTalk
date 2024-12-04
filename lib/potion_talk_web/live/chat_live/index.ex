@@ -16,8 +16,11 @@ defmodule PotionTalkWeb.ChatLive.Index do
   end
 
   def handle_info(%{event: "new_chat", payload: chat}, socket) do
-    IO.puts(chat.chat_id)
-    {:noreply, assign(socket, chat_id: chat.chat_id)}
+    if chat.username != socket.assigns.username do
+      {:noreply, socket}
+    else
+      {:noreply, assign(socket, chat_id: chat.chat_id)}
+    end
   end
 
   defp username do
@@ -25,6 +28,6 @@ defmodule PotionTalkWeb.ChatLive.Index do
   end
 
   defp chat_id do
-    "default_chat"
+    :NO_CHAT_SELECTED
   end
 end

@@ -1,4 +1,5 @@
 defmodule PotionTalkWeb.ChatLive.CreateChat do
+  alias PotionTalk.Storage.ChatStorage
   use PotionTalkWeb, :live_component
 
   def render(assigns) do
@@ -11,7 +12,7 @@ defmodule PotionTalkWeb.ChatLive.CreateChat do
   end
 
   def handle_event("create", %{"chat_name" => chat_name}, socket) do
-    send self(), {:create_chat, chat_name}
+    ChatStorage.add_chat(chat_name)
     {:noreply, socket}
   end
 end
