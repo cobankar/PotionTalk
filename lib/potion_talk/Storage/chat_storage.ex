@@ -20,16 +20,23 @@ defmodule PotionTalk.Storage.ChatStorage do
 
   # Add a new chat by ID
   def add_chat(chat_id) when is_bitstring(chat_id) do
-    dbg(chat_id)
-    :ets.insert(:chats, {chat_id, []})
-    notify(:chat_added, chat_id)
+    exists = :ets.tab2list(:chats)
+    |> Enum.map(fn {chat_id, _} -> chat_id end)
+    |> Enum.member?(chat_id)
+    if !exists do
+      :ets.insert(:chats, {chat_id, []})
+      notify(:chat_added, chat_id)
+      :ok
+    else
+      {:error, :already_exists}
+    end
   end
 
   # Add a message to a specific chat
   def add_message(chat_id, username, content) do
     case :ets.lookup(:chats, chat_id) do
       [{^chat_id, messages}] ->
-        new_messages = [{username, content} | messages]
+        new_messages = [%{name: username, text: content} | messages]
         :ets.insert(:chats, {chat_id, new_messages})
         notify(:message_added, %{chat_id: chat_id, username: username, content: content})
         :ok

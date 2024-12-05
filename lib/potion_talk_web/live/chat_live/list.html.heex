@@ -1,6 +1,9 @@
-<div>
-  <.flash_group flash={@flash} />
-  <h1>Chats</h1>
+<div class="m-1">
+    <.flash_group flash={@flash} />
+  <div class="flex justify-between">
+    <h1>Chats</h1>
+    <.live_component module={PotionTalkWeb.ChatLive.CreateChat} id="create_chat" show_create_chat={@show_create_chat}/>
+  </div>
   <div class="chats">
     <%= if @chats && length(@chats) > 0 do %>
       <%= for c <- @chats do %>
@@ -9,6 +12,5 @@
     <% else %>
       <p>No chats available. Please create a new chat!</p>
     <% end %>
-    <.live_component module={PotionTalkWeb.ChatLive.CreateChat} id="create_chat"/>
   </div>
 </div>
