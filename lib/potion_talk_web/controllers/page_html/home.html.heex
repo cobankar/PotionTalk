@@ -1,10 +1,12 @@
 <.flash_group flash={@flash} />
-<div>
-  <h1>Login</h1>
-  <form method="post">
+<div class="flex flex-col align-center items-center justify-center p-10">
+  <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Login</h1>
+  <%!-- <div> --%>
+  <form class="flex flex-col space-y-2 w-1/2" method="post">
     <input type="hidden" value={get_csrf_token()} name="_csrf_token"/>
-    <label>username</label><br>
-    <input type="text" name="uname"/><br>
-    <button type="submit">Start chatting</button>
+    <label class="block text-sm font-medium text-gray-600" for="uname">Username</label>
+    <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="text" name="uname" placeholder="Enter your username..." autocomplete="off"/>
+    <button class="w-full bg-purple-200 px-4 py-2 rounded-lg hover:bg-gray-700 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" type="submit">Start chatting</button>
   </form>
+  <%!-- </div> --%>
 </div>

@@ -1,0 +1,11 @@
+.chat {
+    height: 75vh
+}
+
+.chats {
+    height: 75vh
+}
+
+#new-chat-input {
+    width: 10em
+}

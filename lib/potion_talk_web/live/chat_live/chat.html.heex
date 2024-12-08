@@ -1,12 +1,16 @@
-<div class="m-1 border-2 border-gray-900">
-  <h1><%=@chat_id %></h1>
-  <div class="messages w-full border-t-2 border-b-2 border-inherit p-2" style="overflow: scroll; height: 60vh">
+<div class="m-1">
+  <div class="flex">
+    <h1><%=@chat_id %></h1>
+    <div class="flex-1"/>
+    <h1 class="italic"><%=@username %></h1>
+  </div>
+  <div class="chat w-full flex-1 space-y-2 p-4 my-4 overflow-y-auto border border-gray-700 rounded">
     <%= for m <- @messages do %>
-      <p style="margin: 2px;"><b><%= m.name %></b>: <%= m.text %></p>
+      <div class="bg-gray-200 w-fit p-2 rounded-lg"><b><%= m.name %></b>: <%= m.text %></div>
     <% end %>
   </div>
   <form class="flex" phx-submit="send">
-    <input class="bg-inherit border-0 border-e-2 w-full" type="text" name="text" placeholder="type message..."/>
+    <input class="bg-inherit border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="text" placeholder="type message..." autocomplete="off"/>
     <div class="flex-1"/>
     <button class="m-2" type="submit">Send</button>
   </form>

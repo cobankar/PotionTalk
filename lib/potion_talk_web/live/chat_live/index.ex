@@ -28,6 +28,6 @@ defmodule PotionTalkWeb.ChatLive.Index do
   end
 
   defp chat_id do
-    :NO_CHAT_SELECTED
+    "No chat selected. Please choose one from the left or create a new one."
   end
 end

@@ -1,6 +1,6 @@
 <div>
-  <div class="grid grid-cols-2 bg-purple-100">
-    <div class="">
+  <div class="flex bg-purple-100">
+    <div class="w-1/4 bg-gray-700 text-purple-200 p-2 rounded">
       <%= live_render(
         @socket,
         PotionTalkWeb.ChatLive.List,
@@ -8,7 +8,7 @@
         session: %{"username" => @username}
       ) %>
     </div>
-    <div class="">
+    <div class="flex-1 flex flex-col p-2 rounded">
         <%= live_render(
           @socket,
           PotionTalkWeb.ChatLive.Chat,

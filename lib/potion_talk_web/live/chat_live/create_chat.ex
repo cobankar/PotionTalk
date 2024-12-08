@@ -7,8 +7,8 @@ defmodule PotionTalkWeb.ChatLive.CreateChat do
     <div>
       <% dbg(assigns) %>
       <%= if @show_create_chat do %>
-        <form phx-submit="create" phx-target={@myself}>
-          <input class="bg-inherit border-0 border-2" type="text" name="chat_name" placeholder="new chat name..."/>
+        <form class="p-1 w-inherit" phx-submit="create" phx-target={@myself}>
+          <input id="new-chat-input" class="bg-inherit border rounded" type="text" name="chat_name" placeholder="new chat name..." autocomplete="off"/>
           <button type="submit">Create</button>
         </form>
       <% else %>

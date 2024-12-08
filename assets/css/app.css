@@ -2,4 +2,19 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "./chat.css";
 /* This file is for your main application CSS */
+
+main {
+    height: 94vh;
+}
+
+header {
+    height: 6vh;
+}
+
+input:focus {
+    outline: none; /* Removes the default focus outline */
+    box-shadow: none; /* Removes any box shadow applied on focus */
+    border-color: gray; /* Keeps the original border color */
+}
